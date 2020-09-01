@@ -8,6 +8,12 @@
   padding: 5%;
 }
 
+.list {
+  background: #5555;
+  border-radius: 3px;
+  padding: 2%;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: black;
@@ -27,20 +33,6 @@ h2 {
 h3 {
   font-size: 1.2em;
   font-weight: 400;
-}
-
-.btn {
-  display: inline-block;
-  border: none;
-  background: #1b1f31;
-  color: #fff;
-  padding: 7px 20px;
-  cursor: pointer;
-  border-radius: 10%;
-}
-
-.btn:hover {
-  background: #2c2f46;
 }
 
 .container {
