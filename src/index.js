@@ -15,9 +15,9 @@ ReactDOM.render(
       <Header />
       <div className="App">
         <Switch>
-          <Route exact path="/" render={(props) => <App />} />
+          <Route exact path="/to-do" render={() => <App />} />
           <Route path="/about" component={About} />
-          <Route exact path="*" render={(props) => <App />} />
+          <Route exact path="*" render={() => <App />} />
         </Switch>
       </div>
     </Router>
