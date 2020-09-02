@@ -8,10 +8,11 @@ import Header from "./components/layout/Header";
 import Nav from "./components/layout/Nav";
 import "./App.css";
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
+const [PENDING, COMPLETED, ALL] = [1, 2, 3];
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [Filters, setFilters] = useState({ filters: [] });
+  const [filterLevel, setFilterLevel] = useState(ALL);
 
   useEffect(() => {
     // fires when app component mounts to the DOM
@@ -49,48 +50,11 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
-  // function filterPending() {
-  //   console.log("wee");
-  //   setTodos(
-  //     todos.map((todo) => {
-  //       if (todo.completed == true) {
-  //         return {
-  //           ...todo,
-  //         };
-  //       }
-  //       return todo;
-  //     })
-  //   );
-  // }
-
-  function showFilteredResults(filters) {
-    console.log(filters);
-  }
-
-  function handleFilters(filters, category) {
-    const newFilters = { ...Filters };
-
-    newFilters[category] = filters;
-    console.log(newFilters);
-    console.log(filters);
-    //showFilteredResults(newFilters)
-    setFilters(newFilters);
-
-    //show pending
-    if (filters === 1)
-      setTodos(
-        todos.map((todo) => {
-          if (todo.completed == false) {
-            return todo;
-          }
-        })
-      );
-
-    //show complete
-    if (filters === 2) console.log(filters);
-    //show all
-    if (filters === 3) console.log(filters);
-  }
+  const visibleTodos = todos.filter((todo) => {
+    if (filterLevel === ALL) return true;
+    if (filterLevel === PENDING) return !todo.completed;
+    if (filterLevel === COMPLETED) return todo.completed;
+  });
 
   return (
     <div>
@@ -106,14 +70,15 @@ function App() {
               render={(props) => (
                 <React.Fragment>
                   <Filter
-                    handleFilters={(filters) =>
-                      handleFilters(filters, "filters")
+                    handleFilters={(newFilterLevel) =>
+                      setFilterLevel(newFilterLevel)
                     }
+                    color={filterLevel}
                   />
                   <div className="list">
                     <TodoForm addTodo={addTodo} />
                     <TodoList
-                      todos={todos}
+                      todos={visibleTodos}
                       removeTodo={removeTodo}
                       toggleComplete={toggleComplete}
                     />
@@ -128,9 +93,5 @@ function App() {
     </div>
   );
 }
-
-const line = {
-  color: "#1b1f31",
-};
 
 export default App;

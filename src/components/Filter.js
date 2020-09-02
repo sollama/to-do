@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ListItem,
   Button,
@@ -24,23 +24,30 @@ function Filter(props) {
     {
       id: 3,
       name: "All",
-      background: "#2a262b",
+      background: "#1b1f31",
     },
   ];
 
   const renderFilterButtons = () =>
-    filters.map((value, index) => (
-      <React.Fragment key={index}>
-        <Button
-          variant="contained"
-          style={filterBtn}
-          onClick={() => handleButtonClick(value.id)}
-        >
-          {" "}
-          <b>{value.name}</b>
-        </Button>
-      </React.Fragment>
-    ));
+    filters.map((value, index) => {
+      const style =
+        props.color === value.id
+          ? { ...filterBtn, background: value.background }
+          : filterBtn;
+
+      return (
+        <React.Fragment key={index}>
+          <Button
+            variant="contained"
+            style={style}
+            onClick={() => handleButtonClick(value.id)}
+          >
+            {" "}
+            <b>{value.name}</b>
+          </Button>
+        </React.Fragment>
+      );
+    });
 
   function handleButtonClick(id) {
     props.handleFilters(id);
@@ -53,7 +60,7 @@ function Filter(props) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography>Filters</Typography>
+        <Typography style={filterHdg}>Filter</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <ListItem style={filterItem}>{renderFilterButtons()}</ListItem>
@@ -61,6 +68,11 @@ function Filter(props) {
     </Accordion>
   );
 }
+
+const filterHdg = {
+  fontFamily: "Segoe UI",
+  letterSpacing: "1.5px",
+};
 
 const filterItem = {
   display: "inline-block",
@@ -71,9 +83,6 @@ const filterBtn = {
   display: "inline-block",
   fontFamily: "Segoe UI",
   margin: "0px 5px",
-  "&:active": {
-    outline: "1px black",
-  },
 };
 
 export default Filter;
