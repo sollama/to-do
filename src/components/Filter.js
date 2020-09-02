@@ -24,7 +24,7 @@ function Filter(props) {
     {
       id: 3,
       name: "All",
-      background: "#1b1f31",
+      background: "#bea4c5",
     },
   ];
 
@@ -71,7 +71,8 @@ function Filter(props) {
 
 const filterHdg = {
   fontFamily: "Segoe UI",
-  letterSpacing: "1.5px",
+  letterSpacing: "1.2px",
+  color: "#2c2f46",
 };
 
 const filterItem = {

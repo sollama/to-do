@@ -87,28 +87,6 @@ function App() {
               )}
             />
             <Route path="/about" component={About} />
-            <Route
-              exact
-              path="*"
-              render={(props) => (
-                <React.Fragment>
-                  <Filter
-                    handleFilters={(newFilterLevel) =>
-                      setFilterLevel(newFilterLevel)
-                    }
-                    color={filterLevel}
-                  />
-                  <div className="list">
-                    <TodoForm addTodo={addTodo} />
-                    <TodoList
-                      todos={visibleTodos}
-                      removeTodo={removeTodo}
-                      toggleComplete={toggleComplete}
-                    />
-                  </div>
-                </React.Fragment>
-              )}
-            />
           </div>
         </div>
       </Router>
