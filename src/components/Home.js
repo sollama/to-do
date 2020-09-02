@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import TodoForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Filter from "./components/Filter";
-import About from "./components/pages/About";
-import Header from "./components/layout/Header";
-import Nav from "./components/layout/Nav";
-import "./App.css";
+import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
+import Filter from "./Filter";
+import "../index.css";
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 const [PENDING, COMPLETED, ALL] = [1, 2, 3];
 
@@ -57,40 +53,20 @@ function App() {
   });
 
   return (
-    <div>
-      <Router>
-        <Nav />
-        <Header />
-
-        <div className="App">
-          <div>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <React.Fragment>
-                  <Filter
-                    handleFilters={(newFilterLevel) =>
-                      setFilterLevel(newFilterLevel)
-                    }
-                    color={filterLevel}
-                  />
-                  <div className="list">
-                    <TodoForm addTodo={addTodo} />
-                    <TodoList
-                      todos={visibleTodos}
-                      removeTodo={removeTodo}
-                      toggleComplete={toggleComplete}
-                    />
-                  </div>
-                </React.Fragment>
-              )}
-            />
-            <Route path="/about" component={About} />
-          </div>
-        </div>
-      </Router>
-    </div>
+    <React.Fragment>
+      <Filter
+        handleFilters={(newFilterLevel) => setFilterLevel(newFilterLevel)}
+        color={filterLevel}
+      />
+      <div className="list">
+        <TodoForm addTodo={addTodo} />
+        <TodoList
+          todos={visibleTodos}
+          removeTodo={removeTodo}
+          toggleComplete={toggleComplete}
+        />
+      </div>
+    </React.Fragment>
   );
 }
 
